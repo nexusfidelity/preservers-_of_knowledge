@@ -5,7 +5,7 @@ numpy
 sklearn
 
 texthero
-spacy==2.3.7
+spacy==2.3.5
 gensim==3.8.3
 
 Pillow
