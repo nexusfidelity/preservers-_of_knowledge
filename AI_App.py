@@ -38,9 +38,9 @@ sidebar = st.sidebar.radio('App Navigation', ['General Info','Project Demo'])
 if sidebar=='General Info':
     st.header('General Info')
 if sidebar=='Project Demo':
-    st.header('Project Demo')
+    st.header('Project Minerva')
     df = pd.DataFrame()
-    topic=st.text_input('search abstract')
+    topic=st.text_input('Search Abstract')
     response = requests.get("https://ntrs.nasa.gov/api/openapi/")
     parameters={#"abstract":"acid",
            "abstract":topic
@@ -53,7 +53,7 @@ if sidebar=='Project Demo':
         abstract = str(x['results'][y]['abstract'])
         subject_category = str(x['results'][y]['subjectCategories'])
         downloadble = str(x['results'][0]['downloadsAvailable'])
-        new_row = {'title':title,'abstract':abstract,'subject_category':subject_category,'is_downloadable':downloadble}
+        new_row = {'Title':title,'Abstract':abstract,'subject_category':subject_category,'is_downloadable':downloadble}
         df = df.append(new_row, ignore_index=True)
         
     #cleaning
@@ -68,15 +68,15 @@ if sidebar=='Project Demo':
                        preprocessing.fillna,
                        preprocessing.lowercase,
                        preprocessing.remove_whitespace]
-    df['abstract'] = hero.clean(df['abstract'], custom_pipeline)
+    df['Abstract'] = hero.clean(df['Abstract'], custom_pipeline)
     
     st.dataframe(df)
     
     narrow_by_category = pd.DataFrame()
 
     category_list = pd.Series(df['subject_category'].unique())
-    st.subheader('narrow by subject category')
-    options = st.multiselect('choose narrowed subject category',category_list,default=None)
+    st.subheader('Filter by subject category')
+    options = st.multiselect('Choose narrowed subject category',category_list,default=None)
     
     if options:
         for x in range(len(options)):
@@ -85,11 +85,11 @@ if sidebar=='Project Demo':
         
     st.dataframe(narrow_by_category)
     
-    st.subheader('narrow by named entities')
+    st.subheader('Filter by named entities')
     options_named_entities = st.selectbox('choose named_entities in abstract',['PERSON', 'NORP', 'FAC', 'ORG','GPE','LOC','PRODUCT','EVENT','WORK_OF_ART','LAW','LANGUAGE','DATE','TIME','PERCENT','MONEY','QUANTITY','ORDINAL','CARDINAL'])
     
 #    st.dataframe(narrow_by_category['abstract'])
-    narrow_by_category['abstract_entities'] = hero.named_entities(narrow_by_category['abstract'])
+    narrow_by_category['abstract_entities'] = hero.named_entities(narrow_by_category['Abstract'])
     
     
     narrow_by_entities= pd.DataFrame()
@@ -107,10 +107,10 @@ if sidebar=='Project Demo':
     st.dataframe(narrow_by_entities)
     
     #visualization
-    wordcloudfig = hero.wordcloud(df['abstract'])
+    wordcloudfig = hero.wordcloud(df['Abstract'])
     st.set_option('deprecation.showPyplotGlobalUse', False)
     col1, col2 = st.columns([3,1])
     col1.subheader('Word Cloud')
     col1.pyplot(wordcloudfig)
     col2.subheader('Top Words')
-    col2.dataframe(hero.top_words(df['abstract']))
+    col2.dataframe(hero.top_words(df['Abstract']))
