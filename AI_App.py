@@ -1,8 +1,7 @@
 import streamlit as st
 import requests
-import json
 import pandas as pd
-import numpy as np
+#import numpy as np
 
 #nltk initializers
 # from nltk.sentiment import SentimentIntensityAnalyzer
@@ -41,7 +40,7 @@ if sidebar=='General Info':
 if sidebar=='Project Demo':
     st.header('Project Demo')
     df = pd.DataFrame()
-    topic=st.text_input('select abstract')
+    topic=st.text_input('search abstract')
     response = requests.get("https://ntrs.nasa.gov/api/openapi/")
     parameters={#"abstract":"acid",
            "abstract":topic
@@ -76,6 +75,7 @@ if sidebar=='Project Demo':
     narrow_by_category = pd.DataFrame()
 
     category_list = pd.Series(df['subject_category'].unique())
+    st.subheader('narrow by subject category')
     options = st.multiselect('choose narrowed subject category',category_list,default=None)
     
     if options:
@@ -85,6 +85,7 @@ if sidebar=='Project Demo':
         
     st.dataframe(narrow_by_category)
     
+    st.subheader('narrow by named entities')
     options_named_entities = st.selectbox('choose named_entities in abstract',['PERSON', 'NORP', 'FAC', 'ORG','GPE','LOC','PRODUCT','EVENT','WORK_OF_ART','LAW','LANGUAGE','DATE','TIME','PERCENT','MONEY','QUANTITY','ORDINAL','CARDINAL'])
     
 #    st.dataframe(narrow_by_category['abstract'])
