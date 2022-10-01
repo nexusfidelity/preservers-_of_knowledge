@@ -6,6 +6,8 @@ sklearn
 statsmodels
 nltk
 
+spacy
+
 Pillow
 Scrapy
 Twisted
