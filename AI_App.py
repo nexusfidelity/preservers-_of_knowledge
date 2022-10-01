@@ -5,8 +5,8 @@ import pandas as pd
 import numpy as np
 
 #nltk initializers
-from nltk.sentiment import SentimentIntensityAnalyzer
-sia = SentimentIntensityAnalyzer()
+# from nltk.sentiment import SentimentIntensityAnalyzer
+# sia = SentimentIntensityAnalyzer()
 
 # import gensim
 # from gensim.utils import simple_preprocess
@@ -18,9 +18,9 @@ sia = SentimentIntensityAnalyzer()
 # import nltk
 # nltk.download('wordnet')
 
-import spacy
-import en_core_web_sm
-nlp = en_core_web_sm.load()
+# import spacy
+# import en_core_web_sm
+# nlp = en_core_web_sm.load()
 import texthero as hero
 from texthero import preprocessing
 
