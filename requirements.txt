@@ -4,7 +4,7 @@ matplotlib
 numpy
 sklearn
 
-texthero>=1.1.0
+texthero
 
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.4.0/en_core_web_sm-3.4.0.tar.gz
 
