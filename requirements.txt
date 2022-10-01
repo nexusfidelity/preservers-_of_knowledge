@@ -5,6 +5,7 @@ numpy
 sklearn
 
 texthero
+spacy==2.3.7
 
 Pillow
 Scrapy
