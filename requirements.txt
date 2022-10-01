@@ -3,7 +3,6 @@ pandas
 matplotlib
 numpy
 sklearn
-statsmodels
 nltk
 
 spacy
