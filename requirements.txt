@@ -6,6 +6,7 @@ sklearn
 
 texthero
 spacy==2.3.7
+gensim==3.8.3
 
 Pillow
 Scrapy
