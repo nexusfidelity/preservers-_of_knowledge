@@ -86,7 +86,11 @@ if sidebar=='Project Demo':
     st.dataframe(narrow_by_category)
     
     st.subheader('Filter by named entities')
-    options_named_entities = st.selectbox('choose named_entities in abstract',['PERSON', 'NORP', 'FAC', 'ORG','GPE','LOC','PRODUCT','EVENT','WORK_OF_ART','LAW','LANGUAGE','DATE','TIME','PERCENT','MONEY','QUANTITY','ORDINAL','CARDINAL'])
+    
+    col1, col2 = st.columns([3,2])
+    options_named_entities = col1.selectbox('choose named_entities in abstract',['PERSON', 'NORP', 'FAC', 'ORG','GPE','LOC','PRODUCT','EVENT','WORK_OF_ART','LAW','LANGUAGE','DATE','TIME','PERCENT','MONEY','QUANTITY','ORDINAL','CARDINAL'])
+    
+    
     
 #    st.dataframe(narrow_by_category['abstract'])
     narrow_by_category['abstract_entities'] = hero.named_entities(narrow_by_category['Abstract'])
@@ -104,7 +108,30 @@ if sidebar=='Project Demo':
             continue
 
     narrow_by_entities=narrow_by_entities[['index','Name','Label']]
-    st.dataframe(narrow_by_entities)
+    col1.dataframe(narrow_by_entities)
+    
+    col2.write('''<p>List of labels:</p>
+               <ul>
+               <li>PERSON: People, including fictional.</li>
+               <li>NORP: Nationalities or religious or political groups.</li>
+               <li>FAC: Buildings, airports, highways, bridges, etc.</li>
+               <li>ORG : Companies, agencies, institutions, etc.</li>
+               <li>GPE: Countries, cities, states.</li>
+               <li>LOC: Non-GPE locations, mountain ranges, bodies of water.</li>
+               <li>PRODUCT: Objects, vehicles, foods, etc. (Not services.)</li>
+               <li>EVENT: Named hurricanes, battles, wars, sports events, etc.</li>
+               <li>WORK_OF_ART: Titles of books, songs, etc.</li>
+               <li>LAW: Named documents made into laws.</li>
+               <li>LANGUAGE: Any named language.</li>
+               <li>DATE: Absolute or relative dates or periods.</li>
+               <li>TIME: Times smaller than a day.</li>
+               <li>PERCENT: Percentage, including ”%“.</li>
+               <li>MONEY: Monetary values, including unit.</li>
+               <li>QUANTITY: Measurements, as of weight or distance.</li>
+               <li>ORDINAL: “first”, “second”, etc.</li>
+               <li>CARDINAL: Numerals that do not fall under another type.</li>
+               </ul>
+               ''',unsafe_allow_html=True)
     
     #visualization
     wordcloudfig = hero.wordcloud(df['Abstract'])
