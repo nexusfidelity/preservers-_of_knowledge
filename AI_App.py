@@ -26,6 +26,7 @@ from texthero import preprocessing
 
 pic2 = Image.open('images/2.png')
 pic3 = Image.open('images/3.jpg')
+logo = Image.open('images/logo.png')
 
 st.set_page_config(
     page_title="Preservers of Knowledge",
@@ -37,6 +38,7 @@ st.set_page_config(
 
 st.title('NASA space app challenge')
 
+st.sidebar.image(logo, width=265)
 sidebar = st.sidebar.radio('App Navigation', ['General Info','Project Demo'])
 
 if sidebar=='General Info':
