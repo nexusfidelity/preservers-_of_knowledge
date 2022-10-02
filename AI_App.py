@@ -40,7 +40,7 @@ if sidebar=='General Info':
 if sidebar=='Project Demo':
     st.header('Project Minerva')
     df = pd.DataFrame()
-    topic=st.text_input('Search Abstract')
+    topic=st.text_input('Search Abstract',value="space station")
     response = requests.get("https://ntrs.nasa.gov/api/openapi/")
     parameters={#"abstract":"acid",
            "abstract":topic
@@ -76,7 +76,7 @@ if sidebar=='Project Demo':
 
     category_list = pd.Series(df['subject_category'].unique())
     st.subheader('Filter by subject category')
-    options = st.multiselect('Choose narrowed subject category',category_list,default=None)
+    options = st.multiselect('Choose narrowed subject category',category_list,default=category_list[0])
     
     if options:
         for x in range(len(options)):
