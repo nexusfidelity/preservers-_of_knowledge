@@ -107,8 +107,18 @@ if sidebar=='Project Demo':
         except KeyError:
             continue
 
-    narrow_by_entities=narrow_by_entities[['index','Name','Label']]
-    col1.dataframe(narrow_by_entities)
+    # for x in range(len(narrow_by_category['abstract_entities'])):
+    #     data = [item for item in narrow_by_category['abstract_entities'][x] if options_named_entities in item]
+    #     dataformat = pd.DataFrame(data, columns=['Name', 'Label', 'starting character','ending character'])
+    #     dataformat['index']=x
+    #     narrow_by_entities = narrow_by_entities.append(dataformat)
+    
+
+    display_narrow_by_entities=narrow_by_entities[['index','Name','Label']]
+    try:
+        col1.dataframe(display_narrow_by_entities)
+    except KeyError:
+        col1.dataframe(display_narrow_by_entities="")
     
     col2.write('''<p>List of labels:</p>
                <ul>
